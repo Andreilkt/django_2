@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>METANIT.COM</title>
+</head>
+<body>
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите имя</label><br>
+            <input type="text" name="name" />
+        </p>
+        <p>
+            <label>Введите возраст</label><br>
+            <input type="number" name="age" />
+        </p>
+        <p>
+            <label>Введите параплан</label><br>
+            <input type="text" name="paraplan" />
+        </p>
+        <p>
+            <label>Введите Подвеску</label><br>
+            <input type="text" name="podveska" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if people.count > 0 %}
+    <h2>Список пилотов </h2>
+    <table>
+        <thead><th>Id</th><th>Имя</th><th>Возраст</th><th>Параплан</th><th>Подвеска</th></thead>
+        {% for person in people %}
+        <tr>
+            <td>{{ person.id }}</td>
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.paraplan }}</td>
+            <td>{{ person.podveska }}</td>
+            <td><a href="edit/{{person.id}}">Изменить</a> | <a href="delete/{{person.id}}">Удалить</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>
